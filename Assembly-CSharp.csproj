@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{872A6340-7108-6A31-9F7D-526601991282}</ProjectGuid>
+    <ProjectGuid>{ACAD8CBE-A284-02B3-4185-297C760F4A83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -56,15 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LevelPackKuis.cs" />
+    <Compile Include="Assets\LevelSoalKuis.cs" />
     <Compile Include="Assets\UI_PoinJawaban.cs" />
-    <Compile Include="Assets\LevelManager.cs" />
-    <Compile Include="Assets\UI_Pertanyaan.cs" />
-    <Compile Include="Assets\UI_PesanLevel.cs" />
     <Compile Include="Assets\UI_Timer.cs" />
+    <Compile Include="Assets\LevelManager.cs" />
+    <Compile Include="Assets\UI_PesanLevel.cs" />
+    <Compile Include="Assets\UI_Pertanyaan.cs" />
+    <Compile Include="Assets\PlayerProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Temporary\contoh.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />

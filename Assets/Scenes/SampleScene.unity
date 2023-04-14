@@ -324,7 +324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ikan
+  m_text: Kuning
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -439,9 +439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Udang
-
-'
+  m_text: Hijau
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -596,7 +594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3499b629f44a0514dbb74a9e22eab292, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f215c0e1b3b09ce499a15c83853ffc4d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1006,9 +1004,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Unta
-
-'
+  m_text: Merah
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1143,7 +1139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hewan Apakah Ini?
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1393,7 +1389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tempatPesan: {fileID: 1345698372}
   _textJawaban: {fileID: 675854471}
-  _adalahBenar: 0
+  _adalahBenar: 1
 --- !u!1 &717210842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,31 +1556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187ebfb6721e9824b81567a9bbb35acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soalsoal:
-  - pertanyaan: Hewan Apakah Ini?
-    petunjukJawaban: {fileID: 21300000, guid: 3499b629f44a0514dbb74a9e22eab292, type: 3}
-    pilihanJawaban:
-    - Unta
-    - Kera
-    - Udang
-    - Ikan
-    adalahbenar: 00010000
-  - pertanyaan: Apa Warna Daun Ini?
-    petunjukJawaban: {fileID: 21300000, guid: 5cb1dbf694951464a84aa2cf5236e425, type: 3}
-    pilihanJawaban:
-    - Hijau
-    - Merah
-    - Abu
-    - Jingga
-    adalahbenar: 01000000
-  - pertanyaan: Apa Warna Laut Ini?
-    petunjukJawaban: {fileID: 21300000, guid: 0534300165ac49d468852f3d66c3e4b1, type: 3}
-    pilihanJawaban:
-    - Biru
-    - Abu
-    - Pink
-    - Coklat
-    adalahbenar: 01000000
+  _playerProgress: {fileID: 11400000, guid: 1e5cf63825ee3a145aa2d5ff12a1c245, type: 2}
+  _soalsoal: {fileID: 11400000, guid: 6dfc69bd3f2ba14458935f48d5ff08df, type: 2}
   _pertanyaan: {fileID: 1715939264}
   _pilihanJawaban:
   - {fileID: 695212648}
@@ -1909,7 +1882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tempatPesan: {fileID: 1345698372}
   _textJawaban: {fileID: 1354312655}
-  _adalahBenar: 1
+  _adalahBenar: 0
 --- !u!1 &1113217455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,9 +2682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kera
-
-'
+  m_text: Biru
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
