@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private PlayerProgress _playerProgress = null;
-    
+
     [SerializeField]
     private LevelPackKuis _soalsoal = null;
 
@@ -23,19 +23,25 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private string _namaScenePilihMenu = string.Empty;
 
+    [SerializeField]
+    private PemanggilSuara _pemanggilSuara = null;
+
+    [SerializeField]
+    private AudioClip _suaraMenang = null;
+
+    [SerializeField]
+    private AudioClip _suaraKalah = null;
+
     private int _indexSoal = -1;
 
     private void Start()
     {
-        //if (!_playerProgress.MuatProgres())
-        //{
-        //    _playerProgress.SimpanProgres(); 
-        //}
 
         _soalsoal = _inisialData.levelPack;
         _indexSoal = _inisialData.levelIndex - 1;
 
         NextLevel();
+        AudioManager.instance.PlayBGM(1);
 
         //Subscribe Event
         UI_PoinJawaban.EventJawabSoal += UI_PoinJawaban_EventJawabSoal;
@@ -54,9 +60,23 @@ public class LevelManager : MonoBehaviour
 
     private void UI_PoinJawaban_EventJawabSoal(string jawaban, bool adalahBenar)
     {
-        if (adalahBenar)
+        _pemanggilSuara.PanggilSuara(adalahBenar ? _suaraMenang : _suaraKalah);
+
+        //Cek jika tidak benar, maka abaikan prosedur
+        if (!adalahBenar) return;
+
+        string namaLevelPack = _inisialData.levelPack.name;
+        int levelTerakhir = _playerProgress.progresData.progresLevel[namaLevelPack];
+
+        //Cek apabila level terakhir kali main telah diselesaikan
+        if (_indexSoal + 2 > levelTerakhir)
         {
+            //Tambahkan koin sebagai hadian setelah menyelesaikan kuis
             _playerProgress.progresData.koin += 20;
+
+            //Membuka level selanjutnya agar dapat diakses di menu level
+            _playerProgress.progresData.progresLevel[namaLevelPack] = _indexSoal + 2;
+            _playerProgress.SimpanProgres();
         }
     }
 
@@ -77,7 +97,7 @@ public class LevelManager : MonoBehaviour
         LevelSoalKuis Soal = _soalsoal.AmbilLevelKe(_indexSoal);
 
         //set informasi soal
-        _pertanyaan.SetPertanyaan($"Soal {_indexSoal + 1}", 
+        _pertanyaan.SetPertanyaan($"Soal {_indexSoal + 1}",
             Soal.pertanyaan, Soal.petunjukJawaban);
 
         for (int i = 0; i < _pilihanJawaban.Length; i++)

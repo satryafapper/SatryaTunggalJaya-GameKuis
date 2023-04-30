@@ -18,19 +18,34 @@ public class PlayerProgress : ScriptableObject
     [SerializeField]
     private string _filename = "contoh.txt";
 
+    [SerializeField]
+    private string _startingLevelPackName = string.Empty;
+
     public MainData progresData = new MainData();
 
     public void SimpanProgres()
     {
-        //Sampel Data
-        progresData.koin = 200;
-        if (progresData.progresLevel == null)
-            progresData.progresLevel = new();
-        progresData.progresLevel.Add("Level Pack 1", 3);
-        progresData.progresLevel.Add("Level Pack 3", 5);
+        ////Sampel Data
+        //progresData.koin = 200;
+        //if (progresData.progresLevel == null)
+        //    progresData.progresLevel = new();
+        //progresData.progresLevel.Add("Level Pack 1", 3);
+        //progresData.progresLevel.Add("Level Pack 3", 5);
 
-        //informasi penyimpanan data
+        //Simpan Starting Data saat objek Dictionary tidak ada saat dimuat
+        if (progresData.progresLevel == null)
+        {
+            progresData.progresLevel = new();
+            progresData.koin = 0;
+            progresData.progresLevel.Add(_startingLevelPackName, 1);
+        }
+
+        //informasi penyimpanan data (Cek Dokumentasi unity nanti)
+#if UNITY_EDITOR
         var directory = Application.dataPath + "/Temporary";
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/progresLokal/";
+#endif
         var path = directory + "/" + _filename;
 
         //Membuat Directory Temporary
@@ -46,9 +61,9 @@ public class PlayerProgress : ScriptableObject
             File.Create(path).Dispose();
             Debug.Log("File Created: " + path);
         }
-        
+
         //menyimpan data ke dalam file menggunakan binari formatter
-        var fileStream = File.Open(path, FileMode.Open); 
+        var fileStream = File.Open(path, FileMode.Open);
         //var formatter = new BinaryFormatter();
 
         fileStream.Flush();
@@ -66,7 +81,7 @@ public class PlayerProgress : ScriptableObject
 
         //putuskan aliran memory dengan file
         writer.Dispose();
-        fileStream.Dispose(); 
+        fileStream.Dispose();
 
         Debug.Log($"{_filename} Berhasil Disimpan");
     }
@@ -74,7 +89,11 @@ public class PlayerProgress : ScriptableObject
     public bool MuatProgres()
     {
         //informasi penyimpanan data
-        string directory = Application.dataPath + "/Temporary";
+#if UNITY_EDITOR
+        var directory = Application.dataPath + "/Temporary";
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/progresLokal/";
+#endif
         string path = directory + "/" + _filename;
 
         var fileStream = File.Open(path, FileMode.OpenOrCreate);
@@ -103,11 +122,11 @@ public class PlayerProgress : ScriptableObject
             {
                 Debug.Log($"ERROR: Terjadi kesalahan saat memuat progres binari.\n{ e.Message}");
 
-                    //putuskan aliran memori dengan file
-                    reader.Dispose();
-                    fileStream.Dispose();
+                //putuskan aliran memori dengan file
+                reader.Dispose();
+                fileStream.Dispose();
 
-                    return false;
+                return false;
             }
 
             ////memuat data dari file menggunakan binary formatter 

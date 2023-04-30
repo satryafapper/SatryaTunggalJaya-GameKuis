@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class UI_OpsiLevelPack : MonoBehaviour
 {
-    public static event System.Action<LevelPackKuis> EventSaatKlik;
-         
+    public static event System.Action<UI_OpsiLevelPack, LevelPackKuis, bool> EventSaatKlik;
+
     [SerializeField]
     private Button _tombol = null;
 
@@ -14,6 +14,15 @@ public class UI_OpsiLevelPack : MonoBehaviour
 
     [SerializeField]
     private LevelPackKuis _levelPack = null;
+
+    [SerializeField]
+    private TextMeshProUGUI _laberTerkunci = null;
+
+    [SerializeField]
+    private TextMeshProUGUI _laberHarga = null;
+
+    [SerializeField]
+    private bool _terkunci = false;
 
     private void Start()
     {
@@ -39,6 +48,22 @@ public class UI_OpsiLevelPack : MonoBehaviour
     private void SaatKlik()
     {
         //Debug.Log("Klik!!");
-        EventSaatKlik?.Invoke(_levelPack);
+        EventSaatKlik?.Invoke(this, _levelPack, _terkunci);
     }
+
+    public void KunciLevelPack()
+    {
+        _terkunci = true;
+        _laberTerkunci.gameObject.SetActive(true);
+        _laberHarga.transform.parent.gameObject.SetActive(true);
+        _laberHarga.text = $"{_levelPack.Harga}";
+    }
+
+    public void BukaLevelPack()
+    {
+        _terkunci = false;
+        _laberTerkunci.gameObject.SetActive(false);
+        _laberHarga.transform.parent.gameObject.SetActive(false);
+    }
+
 }

@@ -3,7 +3,10 @@ using UnityEngine;
 public class UI_LevelPackList : MonoBehaviour
 {
     [SerializeField]
-    private InisialDataGameplay _inisialData = null; 
+    private Animator _animator = null;
+
+    [SerializeField]
+    private InisialDataGameplay _inisialData = null;
 
     [SerializeField]
     private UI_LevelKuisList _levelList = null;
@@ -14,19 +17,17 @@ public class UI_LevelPackList : MonoBehaviour
     [SerializeField]
     private RectTransform _content = null;
 
-    [Space, SerializeField]
-    private LevelPackKuis[] _levelPacks = new LevelPackKuis[0];
     private void Start()
     {
-        LoadLevelPack();
+        //LoadLevelPack();
 
-        if(_inisialData.SaatKalah)
+        if (_inisialData.SaatKalah)
         {
-            UI_OpsiLevelPack_EventSaatKlik(_inisialData.levelPack);
+            UI_OpsiLevelPack_EventSaatKlik(null, _inisialData.levelPack, false);
         }
 
         //Subscribe event
-        UI_OpsiLevelPack.EventSaatKlik += UI_OpsiLevelPack_EventSaatKlik;  
+        UI_OpsiLevelPack.EventSaatKlik += UI_OpsiLevelPack_EventSaatKlik;
     }
 
     private void OnDestroy()
@@ -35,21 +36,28 @@ public class UI_LevelPackList : MonoBehaviour
         UI_OpsiLevelPack.EventSaatKlik -= UI_OpsiLevelPack_EventSaatKlik;
     }
 
-    private void UI_OpsiLevelPack_EventSaatKlik(LevelPackKuis levelPack)
+    private void UI_OpsiLevelPack_EventSaatKlik(UI_OpsiLevelPack tombolLevelPack, 
+        LevelPackKuis levelPack, bool terkunci)
     {
+        if (terkunci)
+            return;
+
         //Buka Menu Level
-        _levelList.gameObject.SetActive(true);
+        //_levelList.gameObject.SetActive(true);
         _levelList.UnloadLevelPack(levelPack);
 
         //tutup menu level
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 
         _inisialData.levelPack = levelPack;
+
+        _animator.SetTrigger("KeLevels");
     }
 
-    private void LoadLevelPack()
+    public void LoadLevelPack(LevelPackKuis[] levelPacks, PlayerProgress.MainData
+        playerData)
     {
-        foreach (var lp in _levelPacks)
+        foreach (var lp in levelPacks)
         {
             //Membuat salinan objek dari prefab tombol level pack
             var t = Instantiate(_tombolLevelPack);
@@ -58,7 +66,14 @@ public class UI_LevelPackList : MonoBehaviour
 
             //Masukan objek tombol sebagai anak dari objek "content"
             t.transform.SetParent(_content);
-            t.transform.localScale = Vector3.one; 
+            t.transform.localScale = Vector3.one;
+
+            //Cek Apakah level pack terdaftar di Dictionary progres pemain
+            if (!playerData.progresLevel.ContainsKey(lp.name))
+            {
+                //Jika Tidak terdaftar, maka levelpack terkunci
+                t.KunciLevelPack();
+            }
         }
     }
 }

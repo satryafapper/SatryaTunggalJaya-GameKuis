@@ -10,7 +10,7 @@ public class UI_Pertanyaan : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _tempatText = null;
-    
+
     [SerializeField]
     private Image _tempatGambar = null;
 

@@ -6,6 +6,9 @@ public class UI_LevelKuisList : MonoBehaviour
     private InisialDataGameplay _inisialData = null;
 
     [SerializeField]
+    private PlayerProgress _playerProgress = null;
+
+    [SerializeField]
     private UI_OpsiLevelKuis _tombolLevel = null;
 
     [SerializeField]
@@ -44,6 +47,9 @@ public class UI_LevelKuisList : MonoBehaviour
     {
         HapusIsiKonten();
 
+        var levelTerbukaTerakhir = _playerProgress.progresData.progresLevel[
+            levelPack.name] - 1;
+
         _levelPack = levelPack;
         for (int i = 0; i < levelPack.BanyakLevel; i++)
         {
@@ -56,6 +62,11 @@ public class UI_LevelKuisList : MonoBehaviour
                 //Masukan objek tombol sebagai anak dari objek "content"
                 t.transform.SetParent(_content);
                 t.transform.localScale = Vector3.one;
+
+                if(i > levelTerbukaTerakhir)
+                {
+                    t.InteraksiTombol = false;
+                }
             }
         }
     }
